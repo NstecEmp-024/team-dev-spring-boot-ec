@@ -1,0 +1,8 @@
+' デフォルトテーマをroseに設定
+skin rose
+' ドロップシャドウを無効
+skinparam shadowing false
+' クラス図でフィールドやメソッドがない場合は罫線を非表示
+hide empty members
+' 要素の表示方向を左から右に設定
+left to right direction
