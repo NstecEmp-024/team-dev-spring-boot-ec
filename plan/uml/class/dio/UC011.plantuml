@@ -3,6 +3,8 @@ title UC011クラス図
 !include config.plantuml
 class SearchProductController{
      + searchProducts(Pageable pageable, Model model) :String
+     + searchProductCategory(Model model) :String
+     + searchProduct(Model model) : String
 }
 
 class ProductCategoryyServiceImpl{
@@ -19,6 +21,7 @@ interface ProductService{
 
 interface ProductCategoryService{
     + getAllCategories() : List<ProductCategory>
+    + getCategoryByCategoryId(Integer categoryId): ProductCategory
     + getCategoryByIdByPage(Integer id): ProductCategory
     
 }
@@ -29,24 +32,29 @@ class ProductServiceImpl{
 
 interface ProductCategoryRepository{
     + findAllCategories() : List<ProductCategory>
-    + findCategoryById(Integer id) : ProductCategory
+    + findCategoryByCategoryId(Integer categoryId) : ProductCategory
 }
 
 interface ProductRepository{
-    + findProductsById(Integer id, Pageable pageable) : List<Product>
+    + findProductsByCategoryIdByPage(Integer id, Pageable pageable) : List<Product>
     + findAllProducts(Pageable pageable) : List<Product>
+    + findProducsByCategoryId(Integer categoryId) : List<Product>
+    + findAllProducts() : List<Product>
+    
 }
 
 entity ProductCategory {
-    + id : Integer
-    + name : String
+    + categoryId : Integer
+    + categoryName : String
 }
 
 entity Product {
     + id : Integer
+    + categoryId : Integer
     + name : String
     + price : Integer
-    + categoryId : Integer
+    + image : String
+    + deleteFlag : boolean
 }
 
 ProductCategoryyServiceImpl -> ProductCategoryRepository
