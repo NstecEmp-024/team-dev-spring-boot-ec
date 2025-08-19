@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class Product {
-    Integer id; //商品ID
-    Integer categoryId; //商品カテゴリID
-    String name; //商品名
-    Integer price; //価格
-    String image; //商品画像URL
-    boolean deleteFlag; //削除フラグ
+    private Integer id; //商品ID
+    private Integer categoryId; //商品カテゴリID
+    private String name; //商品名
+    private Integer price; //価格
+    private String image; //商品画像URL
+    private boolean deleteFlag; //削除フラグ
 }
