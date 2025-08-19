@@ -20,7 +20,7 @@ public interface ProductRepository {
 
      /**
      * 商品テーブルのレコード件数を取得
-     * @return
+     * @return レコードの件数
      */
     Integer countAll();
 

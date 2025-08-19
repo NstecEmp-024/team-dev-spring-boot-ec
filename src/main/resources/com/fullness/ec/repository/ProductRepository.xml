@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullness.ec.repository.ProductRepository">
+    <!-- 商品一覧を取得 -->
+    <select id="findAllProducts" resultType="Product">
+        select id as product_id, name as product_name, price as product_price, description as product_description
+        from product
+    </select>
+
+    <!-- 商品IDで商品を取得 -->
+    <select id="findProductById" parameterType="int" resultType="Product">
+        select id as product_id, name as product_name, price as product_price, description as product_description
+        from product
+        where id = #{id}
+    </select>   
+
+</mapper>
