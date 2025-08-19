@@ -17,11 +17,11 @@ public interface ProductService {
      */
     Page<Product> findProductByPage(Pageable pageable);
 
-    /**
-     * 商品一覧を表示する
-     * @return 商品一覧
-     */
-    List<Product> getAllProducts();
+    // /**
+    //  * 商品一覧を表示する
+    //  * @return 商品一覧
+    //  */
+    // List<Product> getAllProducts();
 
      /**
       * 商品検索（カテゴリ検索）

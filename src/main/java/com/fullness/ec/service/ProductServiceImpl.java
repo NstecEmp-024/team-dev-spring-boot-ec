@@ -45,24 +45,35 @@ public class ProductServiceImpl implements ProductService {
         return new PageImpl<>(products, pageable, total);
     }
 
-    /**
-     * 商品一覧を返す
-     * @return 商品一覧
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public List<Product> getAllProducts(){
-        return productRepository.findAllProducts();
-    }
+    // /**
+    //  * 商品一覧を返す
+    //  * @return 商品一覧
+    //  */
+    // @Transactional(readOnly = true)
+    // @Override
+    // public List<Product> getAllProducts(){
+    //     return productRepository.findAllProducts();
+    // }
 
-    /**
-     * 商品検索（カテゴリ検索）を行う
-     * @param categoryId カテゴリID
-     */
+    // /**
+    //  * 商品検索（カテゴリ検索）を行う
+    //  * @param categoryId カテゴリID
+    //  */
+    // @Transactional(readOnly = true)
+    // @Override
+    // public List<Product> findProductsByCategoryId(Integer categoryId){
+    //     return productRepository.findProductsByCategoryId(categoryId);
+    // }
+
     @Transactional(readOnly = true)
     @Override
-    public List<Product> findProductsByCategoryId(Integer categoryId){
-        return productRepository.findProductsByCategoryId(categoryId);
+    public List<Product> findProductsByCategoryId(Integer categoryId) {
+        if(categoryId == null){
+            return productRepository.findAllProducts();
+        }else{
+            return productRepository.findProductsByCategoryId(categoryId);
+        }
+        
     }
 
 }
