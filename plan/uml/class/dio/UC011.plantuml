@@ -1,0 +1,70 @@
+@startuml
+title UC011クラス図
+!include config.plantuml
+class SearchProductController{
+     + searchProducts(Pageable pageable, Model model) :String
+     + searchProductCategory(Model model) :String
+     + searchProduct(Model model) : String
+}
+
+class ProductCategoryyServiceImpl{
+    
+}
+
+
+
+interface ProductService{
+    
+    + getAllProductsByPage(): List<Product>
+    + getProductsByIdByPage(Integer id): List<Product>
+}
+
+interface ProductCategoryService{
+    + getAllCategories() : List<ProductCategory>
+    + getCategoryByCategoryId(Integer categoryId): ProductCategory
+    + getCategoryByIdByPage(Integer id): ProductCategory
+    
+}
+
+class ProductServiceImpl{
+
+}
+
+interface ProductCategoryRepository{
+    + findAllCategories() : List<ProductCategory>
+    + findCategoryByCategoryId(Integer categoryId) : ProductCategory
+}
+
+interface ProductRepository{
+    + findProductsByCategoryIdByPage(Integer id, Pageable pageable) : List<Product>
+    + findAllProducts(Pageable pageable) : List<Product>
+    + findProducsByCategoryId(Integer categoryId) : List<Product>
+    + findAllProducts() : List<Product>
+    
+}
+
+entity ProductCategory {
+    + categoryId : Integer
+    + categoryName : String
+}
+
+entity Product {
+    + id : Integer
+    + categoryId : Integer
+    + name : String
+    + price : Integer
+    + image : String
+    + deleteFlag : boolean
+}
+
+ProductCategoryyServiceImpl -> ProductCategoryRepository
+ProductServiceImpl -> ProductRepository
+ProductServiceImpl ..|> ProductService
+SearchProductController -> ProductService
+SearchProductController -> ProductCategoryService
+ProductCategoryyServiceImpl ..|> ProductCategoryService
+ProductCategoryRepository -> ProductCategory
+ProductRepository -> Product
+   
+@enduml
+
