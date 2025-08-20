@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント登録（入力）</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1>アカウント登録（入力）</h1>
+        <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+            <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}" class="error"></span>
+            <form th:action="@{/auth}" method="post">
+                <!-- DBと一致していないため確認必須 -->
+                社員名
+                <select th:field="*{itemCategoryId}">
+                    <option th:each="account : ${categoryList}" th:value="${category.id}"
+                        th:selected="${category.id == itemForm.itemCategoryId}" th:text="${category.name}">
+                    </option>
+                </select>
+                <span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}" class="error"></span><br>
+                <br>アカウント名<input type="text" id="empId" name="empId" required></br>
+                <br>パスワード　<input type="password" id="password" name="password" required></br>
+c        </div>
+        </form>
+</body>
+
+</html>

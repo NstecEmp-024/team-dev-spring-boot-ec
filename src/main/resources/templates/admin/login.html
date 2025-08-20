@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン画⾯</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+    <h1>ログイン</h1>
+    <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+        <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}" class="error"></span>
+    </div>
+    <form th:action="@{/admin/login}" method="post">
+        アカウント名<input type="text" id="empId" name="empId" required>
+        パスワード　<input type="password" id="password" name="password" required>
+        <p> </p>
+        <button type="submit">ログイン</button>
+    </div>
+    </form>
+</body>
+
+</html>
