@@ -1,8 +1,13 @@
 package com.fullness.ec.entity;
 
-public class AccountRoll {
-    private Integer empId; // 従業員ID
-    private Integer accountId; // アカウントID
-    private String password; // パスワード
-}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class AccountRoll {
+    private String empName; // アカウントID
+    private Integer empId; // 従業員ID
+}
