@@ -15,6 +15,4 @@ public class RegisterController {
         return "/admin/product-add";
     }
 
-    // Formオブジェクトを初期化
-
 }
