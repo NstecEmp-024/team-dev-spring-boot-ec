@@ -1,0 +1,14 @@
+/* 常時ボタン風 */
+nav .nav-link {
+  border: 2px solid #198754 !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  color: #198754 !important;
+}
+
+/* ホバーで薄い緑背景 */
+nav .nav-link:hover {
+  background-color: #e6ffe6 !important;
+}
