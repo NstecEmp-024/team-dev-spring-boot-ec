@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 import com.fullness.ec.entity.Account;
 
 @Mapper
-public interface EmployeeRepository {
-    void insertAccount(Account account); // アカウント登録
+public interface  AccountRepository {
+    void insert(Account account);
+
+    Account selectByUserName(String username);
+
 }

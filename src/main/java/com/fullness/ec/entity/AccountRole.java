@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AccountRoll {
-    private String empName; // アカウントID
-    private Integer empId; // 従業員ID
+public class AccountRole {
+      private Integer id;
+    private String name;
 }
