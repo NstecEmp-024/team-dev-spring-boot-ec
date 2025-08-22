@@ -45,7 +45,7 @@ public class AccountUserDetailsService implements UserDetailsService {
    * @return ユーザーアカウント権限情報
    */
   private Collection<GrantedAuthority> getAuthorities(Account account) {
-    switch (account.getRole().getName()) {
+    switch (account.getRole().getEmpName()) {
       case "admin":
         return AuthorityUtils.createAuthorityList(
           "ROLE_ADMIN",

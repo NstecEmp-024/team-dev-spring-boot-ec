@@ -38,7 +38,7 @@ public class AccountUserDetails implements UserDetails {
      * @return ユーザーアカウントのユーザー名
      */
     @Override
-    public String getUsername() { return account.getName(); }
+    public String getUsername() { return account.getAccountName(); }
     /** 
      * アカウント自体の有効期限を戻す
      * @return アカウント自体の有効期限

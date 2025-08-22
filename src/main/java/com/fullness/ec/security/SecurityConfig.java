@@ -62,18 +62,18 @@ public class SecurityConfig {
     // ログイン設定
     http.formLogin(login -> login
       .loginProcessingUrl("/auth") // 認証処理を起動するURL
-      .loginPage("/login") // ログイン画面のURL
+      .loginPage("/admin/login") // ログイン画面のURL
       .usernameParameter("username") // 認証リクエストのユーザーパラメーターのキー名の指定
       .passwordParameter("password") // 認証リクエストのパスワードパスワードのキー名の指定
       .defaultSuccessUrl("/menu") // ログイン成功時のURL
-      .failureUrl("/login") // ログイン失敗時のURL
+      .failureUrl("/admin/login") // ログイン失敗時のURL
       .permitAll() // ログイン画面は認証対象外
     );
     
     // ログアウト設定
     http.logout(logout -> logout
       .logoutUrl("/logout") // ログアウト処理をするURL
-      .logoutSuccessUrl("/login") // ログアウト成功時のURL
+      .logoutSuccessUrl("/admin/login") // ログアウト成功時のURL
       .invalidateHttpSession(true) // ログアウト時はセッションを破棄する
       .deleteCookies("JSESSIONID") // ログアウト時はクッキーを削除する
       .clearAuthentication(true) // ログアウト時は認証情報をクリアする
@@ -83,9 +83,10 @@ public class SecurityConfig {
     http.authorizeHttpRequests(authz -> authz
       .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll() // エラー画面は認証対象外
       .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 静的リソースは認証対象外
-      .requestMatchers("/login").permitAll() // ログイン画面は認証対象外
+      .requestMatchers("/admin/login").permitAll() // ログイン画面は認証対象外
       .requestMatchers("/menu","/logout","/session/**").authenticated() // 認証対象
-      .anyRequest().authenticated() // その他は認証対象
+      .anyRequest().permitAll() // その他は認証対象
+      // .authenticated()
     );
     return http.build();
   }

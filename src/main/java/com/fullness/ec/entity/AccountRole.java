@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AccountRole {
-      private Integer id;
-    private String name;
+      private Integer empId;
+    private String empName;
 }

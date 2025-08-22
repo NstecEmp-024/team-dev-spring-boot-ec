@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン画⾯</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+    <div layout:fragment="content"></div>
+</head>
+<header>
+    <div th:replace="~{fragment/login :: header}" style="height: 100px;"></div>
+</header>
+
+<body>
+    <div style="text-align: center;">
+        <br>
+    <h1>ログイン</h1>
+    </div>
+    
+</body>
+
+<div th:insert="fragment/fragment::footer"></div>
+</html>
