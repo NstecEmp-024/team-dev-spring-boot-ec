@@ -1,6 +1,6 @@
 -- 部署テーブル
 drop table if exists department;
-drop sequence if exists department_id_seq;
+-- drop sequence if exists department_id_seq;
 create table department(
   id serial primary key,
   name varchar(100) not null

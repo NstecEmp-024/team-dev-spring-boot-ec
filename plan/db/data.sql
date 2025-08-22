@@ -34,7 +34,14 @@ insert into product values(nextval('product_id_seq'),'油性ボールペン(赤)
 insert into product values(nextval('product_id_seq'),'油性ボールペン(青)',100,'blue_pen_w.jpg',1,0);
 insert into product values(nextval('product_id_seq'),'蛍光ペン(黄)',130,'yellow_maker.jpg',1,0);
 insert into product values(nextval('product_id_seq'),'蛍光ペン(赤)',130,'red_maker.jpg',1,0);
-insert into product values(nextval('product_id_seq'),'蛍光ペン(青)',130,'blue_maker.jpg',1,0);
+insert into product_stock values(nextval('product_stock_id_seq'),20,2);
+insert into product_stock values(nextval('product_stock_id_seq'),30,3);
+insert into product_stock values(nextval('product_stock_id_seq'),40,4);
+insert into product_stock values(nextval('product_stock_id_seq'),50,5);
+insert into product_stock values(nextval('product_stock_id_seq'),60,6);
+insert into product_stock values(nextval('product_stock_id_seq'),70,7);
+insert into product_stock values(nextval('product_stock_id_seq'),80,8);
+insert into product_stock values(nextval('product_id_seq'),'蛍光ペン(青)',130,'blue_maker.jpg',1,0);
 insert into product values(nextval('product_id_seq'),'蛍光ペン(緑)',130,'green_maker.jpg',1,0);
 insert into product values(nextval('product_id_seq'),'鉛筆(黒)',100,'black_pen.jpg',1,0);
 insert into product values(nextval('product_id_seq'),'鉛筆(赤)',100,'red_pen.jpg',1,0);
@@ -54,14 +61,7 @@ insert into product values(nextval('product_id_seq'),'無線式キーボード',
 
 -- product_stock
 insert into product_stock values(nextval('product_stock_id_seq'),10,1);
-insert into product_stock values(nextval('product_stock_id_seq'),20,2);
-insert into product_stock values(nextval('product_stock_id_seq'),30,3);
-insert into product_stock values(nextval('product_stock_id_seq'),40,4);
-insert into product_stock values(nextval('product_stock_id_seq'),50,5);
-insert into product_stock values(nextval('product_stock_id_seq'),60,6);
-insert into product_stock values(nextval('product_stock_id_seq'),70,7);
-insert into product_stock values(nextval('product_stock_id_seq'),80,8);
-insert into product_stock values(nextval('product_stock_id_seq'),90,9);
+insert into produstock values(nextval('product_stock_id_seq'),90,9);
 insert into product_stock values(nextval('product_stock_id_seq'),100,10);
 insert into product_stock values(nextval('product_stock_id_seq'),110,11);
 insert into product_stock values(nextval('product_stock_id_seq'),120,12);
