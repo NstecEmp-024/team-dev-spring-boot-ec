@@ -29,18 +29,27 @@ public class ProductServiceImpl implements ProductService {
       * @param pageable ページ情報    
       *@return 商品一覧
       */
+
     @Override
-    public Page<Product> findProductByPage (Pageable pageable) {
+    public Page<Product> findProductByPage (Pageable pageable, Integer categoryId) {
         // レコード数を取得する
-        Integer total = productRepository.countAll();
+        //trimで１つに
+        Integer total;
         List<Product> products;
-        if (total > 0) {
-            //　1ページ分のデータを取得する
+        // カテゴリIDが指定されていない場合は全商品を取得
+        // カテゴリIDが指定されている場合はそのカテゴリの商品を取得
+
+         if(categoryId == null || categoryId == 0){
+
             products = productRepository.findAllProductsByPage(pageable);
-        } else {
-            //空のリストを生成する
-            products = Collections.emptyList();
-        } 
+            total = productRepository.countAll();
+
+        }else{
+            
+            products =  productRepository.findProductsByCategoryIdAndPage(pageable,categoryId);
+            total = productRepository.countAllByCategoryId(categoryId);
+        }
+
         // 取得したデータ、ページデータ。件数を返す
         return new PageImpl<>(products, pageable, total);
     }
@@ -68,7 +77,9 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     @Override
     public List<Product> findProductsByCategoryId(Integer categoryId) {
-        if(categoryId == null){
+        // カテゴリIDが指定されていない場合は全商品を取得
+        // カテゴリIDが指定されている場合はそのカテゴリの商品を取得
+        if(categoryId == null || categoryId == 0){
             return productRepository.findAllProducts();
         }else{
             return productRepository.findProductsByCategoryId(categoryId);

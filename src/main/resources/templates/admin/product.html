@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品検索</title>
+    <style>
+        .button-container button {
+             display: flex;
+
+             flex-wrap: no-wrap;
+        }
+    </style>
+</head>
+ 
+<body>
+    <!-- fragmentのフォルダのfragment.htmlに記述された
+     th:fragment="fooder"の内容が追加される-->
+    <div th:insert="fragment/fragment::header"></div>
+    <div id="main" style="text-align: center">
+        <h2>商品検索</h2>
+        <!-- 商品カテゴリのプルダウン -->
+        <div>
+            <!--<select th:field="*{productCategoryId}">-->
+            <form th:action="@{/admin/product}" method="get" style="display: inline-block; margin-right: 10px;">
+                <select name="categoryId">
+                    <option value="0">カテゴリを選択してください</option>
+                    <option th:each="category : ${productCategoryList}" 
+                            th:value="${category.categoryId}"
+                            th:selected="${category.categoryId == selectCategoryId}" 
+                            th:text="${category.categoryName}">
+                    </option>
+                </select>
+                <button type="submit" value="検索">検索</button>
+            </form>
+
+            <form th:action="@{/admin/product/add}" method="get" style="display: inline-block;">
+                <button type="submit">商品追加</button>
+            </form>
+
+        </div>
+        <br>
+        <table border="1" style="border-collapse: collapse; width: 50%; margin: 0 auto;">
+            <tr>
+                <th>商品画像</th>
+                <th>商品名</th>
+                <th>単価</th>
+                <th>修正</th>
+                <th>削除</th>
+            </tr>
+            <tr th:each="productsPage : ${productsPage}">
+                <td>
+                    <img th:src="@{'/images/' + ${productsPage.image}}" alt="商品画像" width="100" height="100" />
+                </td>
+                <td th:text="${productsPage.name}">商品名</td>
+                <td th:text="${#numbers.formatInteger(productsPage.price, 3, 'COMMA')} + '円'">単価</td>
+                <td>
+                    
+                    <form th:action="@{/admin/product/edit/{productId}}" method="get">
+
+                    <button type="submit" name="productId">修正</button>
+                    </form>
+
+                </td>
+                <td>
+                    
+                    <form th:action="@{/admin/product/delete/{productId}}" method="get">
+                    
+                    <button type="submit" name="productId">削除</button>
+                    
+                    </form>
+                
+                </td>
+        </table>
+        <ul class="pagination" style="color: green;">
+            <!-- 最初のページの場合はリンクを非活性化にし2ページ目以降はリンクを有効にする -->
+            <li th:class="${productsPage.first} ? 'disabled':''" style="display: inline">
+                <span th:if="${productsPage.first}">最初</span>
+<!--
+                <a th:if="${not productsPage.first}" th:href="@{__${pageUrl}__page=0}">最初</a>                
+                <a th:if="${not productsPage.first}" th:href="@{${pageUrl}(categoryId=${selectCategoryId},page=0)}">最初</a>
+-->            
+                 <a th:if="${not productsPage.first}" th:href="@{__${pageUrl}__categoryId=__${selectCategoryId}__&page=0}">最初</a> 
+            </li>
+            <!-- 最初のページの場合はリンクを非活性化にし2ページ目以降はリンクを有効にする -->
+            <li th:class="${productsPage.first} ? 'disabled':''" style="display: inline">
+                <span th:if="${productsPage.first}">前へ</span>
+<!--
+                <a th:if="${not productsPage.first}" th:href="@{__${pageUrl}__page=__${prev}__}">前へ</a>
+                <a th:if="${not productsPage.first}" th:href="@{${pageUrl}(categoryId=${selectCategoryId},page=${prev})}">前へ</a>
+ -->
+                <a th:if="${not productsPage.first}" th:href="@{__${pageUrl}__categoryId=__${selectCategoryId}__&page=__${prev}__}">前へ</a>
+            </li>
+            <!-- ページ毎のリンクを表示 現在のページの場合はリンクを非活性化にし現在のページ以外はリンクを有効にする-->
+            <li th:each="p : ${#numbers.sequence(0, productsPage.totalPages-1)}"
+                th:class="(${p}==${productsPage.number})? 'active' : ''" style="display: inline">
+                <span th:if="${p}==${productsPage.number}" th:text="${p+1}">1</span>
+<!--
+                <a th:if="${p}!=${productsPage.number}" th:href="@{__${pageUrl}__page=__${p+1}__}">
+                <a th:if="${p}!=${productsPage.number}" th:href="@{${pageUrl}(categoryId=${selectCategoryId},page=${p+1})}"></a>
+-->   
+                <a th:if="${p}!=${productsPage.number}" th:href="@{__${pageUrl}__categoryId=__${selectCategoryId}__&page=__${p+1}__}" th:text="${p+1}">
+                    <!--<span th:text="${p+1}">1</span>-->
+
+                </a>
+            </li>
+            <!-- 最後のページの場合はリンクを非活性化にし最後のページ目以外はリンクを有効にする -->
+            <li th:class="${productsPage.last} ? 'disabled':''" style="display: inline">
+                <span th:if="${productsPage.last}">次へ</span>
+<!-- 
+                <a th:if="${not productsPage.last}" th:href="@{__${pageUrl}__page=__${next}__}">次へ</a>
+                <a th:if="${not productsPage.last}" th:href="@{${pageUrl}(categoryId=${selectCategoryId},page=${next})}">次へ</a>
+-->  
+                <a th:if="${not productsPage.last}" th:href="@{__${pageUrl}__categoryId=__${selectCategoryId}__&page=__${next}__}">次へ</a>
+            </li>
+            <!-- 最後のページの場合はリンクを非活性化にし最後のページ目以外はリンクを有効にする -->
+            <li th:class="${productsPage.last} ? 'disabled':''" style="display: inline">
+                <span th:if="${productsPage.last}">最後</span>
+<!--
+                <a th:if="${not productsPage.last}"
+                    th:href="@{__${pageUrl}__page=__${productsPage.totalPages}__}">最後</a>
+
+                <a th:if="${not productsPage.last}" 
+                    th:href="@{${pageUrl}(categoryId=${selectCategoryId},page=${productsPage.totalPages})}">最後</a>
+     -->   
+                <a th:if="${not productsPage.last}"
+                    th:href="@{__${pageUrl}__categoryId=__${selectCategoryId}__&page=__${productsPage.totalPages}__}">最後</a>
+
+            </li>
+        </ul>
+        <br>
+        <br>
+    </div>
+    <!-- fragmentのフォルダのfragment.htmlに記述された
+     th:fragment="fooder"の内容が追加される-->
+    <div th:insert="fragment/fragment::footer"></div>
+</body>
+
+</html>

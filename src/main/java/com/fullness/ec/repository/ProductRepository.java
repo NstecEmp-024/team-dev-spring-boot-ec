@@ -27,12 +27,27 @@ public interface ProductRepository {
     Integer countAll();
 
     /**
+     * 商品テーブルのレコード件数を取得
+     * 
+     * @return
+     */
+    Integer countAllByCategoryId(Integer categoryId);
+
+    /**
      * 1ページ分の表示データを取得する
      * 
      * @param pageable //1ページ分のデータ
      * @return 1ページ分の表示データ
      */
     List<Product> findAllProductsByPage(@Param("pageable") Pageable pageable);
+
+    /**
+     * カテゴリIDを指定して、1ページ分の表示データを取得する
+     * @param pageable
+     * @param categoryId
+     * @return 1ページ分の表示データ
+     */
+    List<Product> findProductsByCategoryIdAndPage(@Param("pageable") Pageable pageable, Integer categoryId);
 
     /**
      * DBに新商品情報を登録する

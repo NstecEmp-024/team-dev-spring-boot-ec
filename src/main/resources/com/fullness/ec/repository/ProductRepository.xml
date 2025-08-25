@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fullness.ec.repository.ProductRepository">
-    <!-- 商品一覧を取得 -->
-    <select id="findAllProducts" resultType="Product">
-        select id as product_id, name as product_name, price as product_price, description as product_description
-        from product
-    </select>
+ 
+  <!-- 商品一覧を取得 -->
+  <!-- 商品は昇順で取得 -->
+  <select id="findAllProducts" resultType="Product"> select id , name , price , image_url as image
+    from product where delete_flag = 0 order by id asc </select>
 
-    <!-- 商品IDで商品を取得 -->
-    <select id="findProductById" parameterType="int" resultType="Product">
-        select id as product_id, name as product_name, price as product_price, description as product_description
-        from product
-        where id = #{id}
-    </select>   
+  <!-- 商品カテゴリIDで商品を取得 -->
+  <!-- 商品は昇順で取得 -->
+  <select id="findProductsByCategoryId" resultType="Product"> select id , name , price , image_url
+    as image from product where product_category_id = #{categoryId} and delete_flag = 0 order by id asc </select>
 
-    <insert id="insert" parameterType="com.fullness.ec.entity.Product">
-      <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
-        select nextval('product_id_seq')
-      </selectKey>
-      insert into product values(#{id}, #{categoryId}, #{name}, #{price}, #{image})
-    </insert>
+  <!--ページネーション-->
+  <!--件数取得-->
+  <select id="countAll" resultType="int"> select count(*) from product where delete_flag = 0 </select>
+  <select id="countAllByCategoryId" resultType="int"> select count(*) from product where product_category_id = #{categoryId} and delete_flag = 0 </select>
 
+  <!-- 商品一覧を取得 -->
+  <select id="findAllProductsByPage" resultType="Product"> 
+    select id , name , price , image_url as image
+    from product where delete_flag = 0 order by id asc 
+    limit  #{pageable.pageSize} offset #{pageable.offset}
+  </select>
+
+  <!-- 商品カテゴリIDで商品を取得 -->
+   <select id="findProductsByCategoryIdAndPage" resultType="Product">  
+    select id , name , price , image_url
+    as image from product where product_category_id = #{categoryId} and delete_flag = 0 
+    order by id asc 
+    limit  #{pageable.pageSize} offset #{pageable.offset}
+  </select>
 </mapper>

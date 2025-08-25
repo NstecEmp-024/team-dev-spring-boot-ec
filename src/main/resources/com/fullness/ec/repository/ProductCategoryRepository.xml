@@ -4,6 +4,6 @@
     <!-- 商品カテゴリ一覧を取得　-->
     <select id="findAllCategories" resultType="ProductCategory">
         select id as categoryId, name as categoryName
-            from product_category
+            from product_category order by id asc
     </select>
 </mapper>

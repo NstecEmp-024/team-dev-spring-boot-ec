@@ -1,8 +1,12 @@
 package com.fullness.ec.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     private Integer id; //商品ID
     private Integer categoryId; //商品カテゴリID

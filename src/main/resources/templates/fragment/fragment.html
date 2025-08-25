@@ -12,20 +12,31 @@
       background-color: white;
       clear: left;
       height: 100px;
+      display: flex;
+      justify-content: center;
     }
   </style>
   <body>
     <!-- ヘッダー部分 -->
-    <div th:fragment="header" id="header">
-      <h1>フルネス文房具 管理画面</h1>
-      <a href="#">商品情報メンテナンス</a>
-      <a href="#">商品カテゴリ登録</a>
-      <a href="#">アカウント登録</a>
-      <a href="#">ログアウト</a>
+    <div
+      th:fragment="header"
+      id="header"
+      style="text-align: center; border-bottom: 2px solid green"
+    >
+      <h1 style="color: green">フルネス文房具 管理画面</h1>
+      <a href="#" style="color: green">商品情報メンテナンス</a>
+      <a href="#" style="color: green">商品カテゴリ登録</a>
+      <a href="#" style="color: green">アカウント登録</a>
+      <button type="button">ログアウト</button>
     </div>
     <!-- フッター部分 -->
-    <div th:fragment="footer" id="footer">
-      <p>Fullness Stationery</p>
+    <div
+      th:fragment="footer"
+      id="footer"
+      ;
+      style="text-align: center; border-top: 2px solid green"
+    >
+      <p style="color: green">Fullness Stationery</p>
     </div>
   </body>
 </html>

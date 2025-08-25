@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.fullness.ec.entity.AccountRoll;
 
-@Mapper
+//@Mapper
 public interface ManageResistRepository {
-    List<AccountRoll> selectByEmployee();
+    // List<AccountRoll> selectByEmployee();
 }

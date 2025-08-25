@@ -15,7 +15,7 @@ public interface ProductService {
      * @param pageable ページ情報
      * @return 商品データのページ
      */
-    Page<Product> findProductByPage(Pageable pageable);
+    Page<Product> findProductByPage(Pageable pageable, Integer categoryId);
 
     // /**
     //  * 商品一覧を表示する
