@@ -35,6 +35,9 @@ public class ProductServiceTest {
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
         assertEquals(24, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
+        assertEquals("蛍光ペン(緑)", productsPage.getContent().get(9).getName()); // ソート順による10番目
+
+
 
 
     }
@@ -56,7 +59,7 @@ public class ProductServiceTest {
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
         assertEquals(24, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
-
+        assertEquals("蛍光ペン(緑)", productsPage.getContent().get(9).getName()); // ソート順による10番目
     } 
     
     // 商品IDを指定して商品情報を取得するメソッドのテスト
@@ -76,6 +79,7 @@ public class ProductServiceTest {
         assertEquals(1, productsPage.getTotalPages()); // 総ページ数
         assertEquals(4, productsPage.getTotalElements()); // 総件数
         assertEquals("ワンタッチ開閉傘", productsPage.getContent().get(0).getName()); // ソート順による先頭
+        assertEquals("キーホルダ", productsPage.getContent().get(3).getName()); // ソート順による先頭
 
     }
 }
