@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        text-align: center;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <style></style>
+  <body>
+    <div th:replace="fragment/fragment::header"></div>
+    <h1>新商品登録(入力)</h1>
+    <form
+      th:action="@{/admin/confirm}"
+      method="post"
+      th:object="${newItemForm}"
+    >
+      <p>商品名<input type="text" th:field="*{name}" /></p>
+      <span
+        th:if="${#fields.hasErrors('name')}"
+        th:errors="*{name}"
+        class="error"
+      ></span
+      ><br />
+      <p>価格<input type="number" th:field="*{price}" /></p>
+      <span
+        th:if="${#fields.hasErrors('price')}"
+        th:errors="*{price}"
+        class="error"
+      ></span
+      ><br />
+      <p>在庫数<input type="number" th:field="*{amount}" /></p>
+      <span
+        th:if="${#fields.hasErrors('amount')}"
+        th:errors="*{amount}"
+        class="error"
+      ></span
+      ><br />
+      <p>
+        商品カテゴリ<select name="categoryId">
+          <option
+            th:each="itemCategory : ${categoryList}"
+            th:value="${itemCategory.categoryId}"
+            th:selected="${itemCategory.categoryId == newItemForm.options}"
+            th:text="${itemCategory.categoryName}"
+          ></option>
+          <!-- <span
+            th:if="${#fields.hasErrors('options')}"
+            th:errors="*{options}"
+            class="error"
+          ></span> -->
+        </select>
+      </p>
+      <br />
+      <p>画像<input type="file" name="file" /></p>
+      <p>
+        <!-- <form th:action="@{/image}" method="post" enctype="multipart/form-data"></form> -->
+        <a th:href="@{/admin/product}">キャンセル</a>
+        <button type="submit">完了</button>
+      </p>
+    </form>
+    <div th:insert="fragment/fragment::footer"></div>
+  </body>
+</html>
