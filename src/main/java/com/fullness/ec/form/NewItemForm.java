@@ -27,12 +27,12 @@ public class NewItemForm implements Serializable {
     private String name; // 商品名
 
     @Max(1000000)
-    @NotBlank
+    @NotNull
     @Positive
     private Integer price; // 価格
 
     @Max(1000)
-    @NotBlank
+    @NotNull
     @Positive
     private Integer amount; // 在庫数
 
