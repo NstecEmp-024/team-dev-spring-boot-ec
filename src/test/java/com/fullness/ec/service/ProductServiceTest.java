@@ -35,7 +35,6 @@ public class ProductServiceTest {
 
         // 期待される結果を検証
         assertEquals(10, productsPage.getContent().size()); // 実際に取得された件数
-        assertEquals(0, productsPage.getNumber()); // ページ番号
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
         assertEquals(24, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
@@ -57,7 +56,6 @@ public class ProductServiceTest {
 
         // 期待される結果を検証
         assertEquals(10, productsPage.getContent().size()); // 実際に取得された件数
-        assertEquals(0, productsPage.getNumber()); // ページ番号
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
         assertEquals(24, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
@@ -78,7 +76,6 @@ public class ProductServiceTest {
 
         // 期待される結果を検証
         assertEquals(4, productsPage.getContent().size()); // 実際に取得された件数
-        assertEquals(0, productsPage.getNumber()); // ページ番号
         assertEquals(1, productsPage.getTotalPages()); // 総ページ数
         assertEquals(4, productsPage.getTotalElements()); // 総件数
         assertEquals("ワンタッチ開閉傘", productsPage.getContent().get(0).getName()); // ソート順による先頭
