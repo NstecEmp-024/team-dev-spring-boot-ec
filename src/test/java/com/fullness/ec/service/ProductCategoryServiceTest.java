@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fullness.ec.entity.ProductCategory;
 import com.fullness.ec.repository.ProductCategoryRepository;
@@ -18,6 +19,9 @@ public class ProductCategoryServiceTest {
     
     @Autowired 
     ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    ProductCategoryService categoryService;
     
     // カテゴリ取得のテストクラス
     // ここでは、ProductCategoryServiceのメソッドをテストするためのコードを記述します。
@@ -36,6 +40,30 @@ public class ProductCategoryServiceTest {
         assertEquals("雑貨", categories.get(1).getCategoryName());
         assertEquals("パソコン周辺機器", categories.get(2).getCategoryName());
         
+    }
+    @Transactional
+    @Test // 新カテゴリ登録テスト
+    public void testAddCategory() {
+        ProductCategory category = new ProductCategory();
+        category.setCategoryName("テストカテゴリ");
+        categoryService.addCategory(category);
+        assertEquals("テストカテゴリ", category.getCategoryName());
+    }
+    @Transactional
+    @Test // カテゴリ重複チェックテスト（重複する場合）
+    public void testExistCategory() {
+        ProductCategory category = new ProductCategory();
+        category.setCategoryName("文房具");
+        boolean exists = categoryService.existCategory(category.getCategoryName());
+        assertEquals(true, exists);
+    }
+    @Transactional
+    @Test // カテゴリ重複チェックテスト(重複しない場合)
+    public void testExistCategory2() {
+        ProductCategory category = new ProductCategory();
+        category.setCategoryName("テスト");
+        boolean exists = categoryService.existCategory(category.getCategoryName());
+        assertEquals(false, exists);
     }
 
 }
