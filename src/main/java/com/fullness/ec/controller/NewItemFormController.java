@@ -85,8 +85,14 @@ public class NewItemFormController {
 
     @GetMapping("/complete")
     public String complete(@ModelAttribute("newItemFormFlash") NewItemForm newItemForm, SessionStatus sessionStatus) {
-        sessionStatus.setComplete();
+        // sessionStatus.setComplete();
         return "admin/product/add/complete";
+    }
+
+    @GetMapping("/reset")
+    public String reset(SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        return "redirect:/admin/product";
     }
 
 }
