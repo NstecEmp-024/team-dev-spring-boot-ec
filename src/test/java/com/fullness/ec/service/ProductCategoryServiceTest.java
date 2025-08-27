@@ -14,15 +14,15 @@ import com.fullness.ec.repository.ProductCategoryRepository;
 
 @SpringBootTest
 public class ProductCategoryServiceTest {
-    @Autowired 
+    @Autowired
     ProductCategoryService productCategoryService;
-    
-    @Autowired 
+
+    @Autowired
     ProductCategoryRepository productCategoryRepository;
 
     @Autowired
     ProductCategoryService categoryService;
-    
+
     // カテゴリ取得のテストクラス
     // ここでは、ProductCategoryServiceのメソッドをテストするためのコードを記述します。
     @Test
@@ -39,16 +39,19 @@ public class ProductCategoryServiceTest {
         assertEquals("文房具", categories.get(0).getCategoryName());
         assertEquals("雑貨", categories.get(1).getCategoryName());
         assertEquals("パソコン周辺機器", categories.get(2).getCategoryName());
-        
+
     }
+
     @Transactional
     @Test // 新カテゴリ登録テスト
     public void testAddCategory() {
         ProductCategory category = new ProductCategory();
         category.setCategoryName("テストカテゴリ");
         categoryService.addCategory(category);
-        assertEquals("テストカテゴリ", category.getCategoryName());
+        List<ProductCategory> categories = productCategoryRepository.selectAll();
+        assertEquals(4, categories.size());
     }
+
     @Transactional
     @Test // カテゴリ重複チェックテスト（重複する場合）
     public void testExistCategory() {
@@ -57,6 +60,7 @@ public class ProductCategoryServiceTest {
         boolean exists = categoryService.existCategory(category.getCategoryName());
         assertEquals(true, exists);
     }
+
     @Transactional
     @Test // カテゴリ重複チェックテスト(重複しない場合)
     public void testExistCategory2() {
