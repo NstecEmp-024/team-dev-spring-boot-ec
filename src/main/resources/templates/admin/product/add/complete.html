@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      th:replace="fragment/fragment::header"
+      style="text-align: center"></div>
+    <h1>新商品登録(完了)</h1>
+    <p>商品名<span th:text="${newItemForm.name}">を登録しました。</span></p>
+    <a th:href="@{/xxx/xxx}">
+      <button type="button">業務終了</button>
+    </a>
+    <!-- 業務終了したらどこに行くのか -->
+    <a th:href="@{/admin/product}">
+      <button type="button">商品検索に戻る</button>
+    </a>
+    </form>
+     <a th:href="@{/admin/product-add}">
+       <button type="button">入力に戻る</button>
+    </a>
+    <div th:insert="fragment/fragment::footer"></div>
+  </body>
+</html>
+
