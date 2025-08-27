@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fullness.ec.entity.Product;
+import com.fullness.ec.form.NewItemForm;
+import com.fullness.ec.helper.NewItemHelper;
 import com.fullness.ec.repository.ProductRepository;
 
 /**
@@ -22,31 +24,31 @@ public class ProductServiceImpl implements ProductService {
     // ProductRepositoryを利用してデータベースにアクセスする
     @Autowired
     private ProductRepository productRepository;
-    
-    
-     /**
-      * 商品ページ毎に取得する
-      * @param pageable ページ情報    
-      *@return 商品一覧
-      */
+
+    /**
+     * 商品ページ毎に取得する
+     * 
+     * @param pageable ページ情報
+     * @return 商品一覧
+     */
 
     @Override
-    public Page<Product> findProductByPage (Pageable pageable, Integer categoryId) {
+    public Page<Product> findProductByPage(Pageable pageable, Integer categoryId) {
         // レコード数を取得する
-        //trimで１つに
+        // trimで１つに
         Integer total;
         List<Product> products;
         // カテゴリIDが指定されていない場合は全商品を取得
         // カテゴリIDが指定されている場合はそのカテゴリの商品を取得
 
-         if(categoryId == null || categoryId == 0){
+        if (categoryId == null || categoryId == 0) {
 
             products = productRepository.findAllProductsByPage(pageable);
             total = productRepository.countAll();
 
-        }else{
-            
-            products =  productRepository.findProductsByCategoryIdAndPage(pageable,categoryId);
+        } else {
+
+            products = productRepository.findProductsByCategoryIdAndPage(pageable, categoryId);
             total = productRepository.countAllByCategoryId(categoryId);
         }
 
@@ -55,23 +57,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // /**
-    //  * 商品一覧を返す
-    //  * @return 商品一覧
-    //  */
+    // * 商品一覧を返す
+    // * @return 商品一覧
+    // */
     // @Transactional(readOnly = true)
     // @Override
     // public List<Product> getAllProducts(){
-    //     return productRepository.findAllProducts();
+    // return productRepository.findAllProducts();
     // }
 
     // /**
-    //  * 商品検索（カテゴリ検索）を行う
-    //  * @param categoryId カテゴリID
-    //  */
+    // * 商品検索（カテゴリ検索）を行う
+    // * @param categoryId カテゴリID
+    // */
     // @Transactional(readOnly = true)
     // @Override
     // public List<Product> findProductsByCategoryId(Integer categoryId){
-    //     return productRepository.findProductsByCategoryId(categoryId);
+    // return productRepository.findProductsByCategoryId(categoryId);
     // }
 
     @Transactional(readOnly = true)
@@ -79,12 +81,23 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findProductsByCategoryId(Integer categoryId) {
         // カテゴリIDが指定されていない場合は全商品を取得
         // カテゴリIDが指定されている場合はそのカテゴリの商品を取得
-        if(categoryId == null || categoryId == 0){
+        if (categoryId == null || categoryId == 0) {
             return productRepository.findAllProducts();
-        }else{
+        } else {
             return productRepository.findProductsByCategoryId(categoryId);
         }
-        
+
+    }
+
+    @Override
+    public void addProduct(NewItemForm newItemForm) {
+        Product product = NewItemHelper.convert(newItemForm);
+        productRepository.insert(product);
+    }
+
+    @Override
+    public List<Product> selectAll() {
+        return productRepository.selectAll();
     }
 
 }
