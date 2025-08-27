@@ -15,7 +15,7 @@
         <form th:action="@{/admin/product-category-add/confirm}" method="post" th:object="${categoryForm}">
             <p>商品カテゴリ名：<input type="text" th:field="*{categoryName}" /></p>
             <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" class="error"></span><br>
-            <a href="#" style="color: green">キャンセル</a>
+            <a href="/admin" style="color: green">キャンセル</a>
             <input type="submit" value="確認">
             <p></p>
             <p></p>
