@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -21,17 +22,17 @@ public class NewItemForm implements Serializable {
     private Integer id; // 商品ID
     private Integer categoryId; // 商品カテゴリID
     @Size(min = 2, max = 22)
-    @NotNull
+    @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-００-９]*$")
     private String name; // 商品名
 
     @Max(1000000)
-    @NotNull
+    @NotBlank
     @Positive
     private Integer price; // 価格
 
     @Max(1000)
-    @NotNull
+    @NotBlank
     @Positive
     private Integer amount; // 在庫数
 
