@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <div th:replace="fragment/fragment::header" style="text-align: center"></div>
+    <div style="text-align: center;">
+        <h1>商品カテゴリ登録（確認）</h1>
+        <form th:action="@{/admin/product-category-add/register}" method="post" th:object="${categoryForm}">
+            <p>商品カテゴリ名：<span th:text="${categoryForm.categoryName}"></span></p>
+            <a href="#" style="color: green">キャンセル</a>
+            <a href="/admin/product-category-add" style="color: green">戻る</a>
+            <input type="submit" value="登録">
+        </form>
+    </div>
+    <div th:insert="fragment/fragment::footer"></div>
+</body>
+</html>
