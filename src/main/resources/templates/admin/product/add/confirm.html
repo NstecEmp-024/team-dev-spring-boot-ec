@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      th:replace="fragment/fragment::header"
+      style="text-align: center"
+    ></div>
+    <h1>新商品登録(確認)</h1>
+
+    <p>商品名<span th:text="${newItemForm.name}"></span></p>
+    <p>単価<span th:text="${newItemForm.price}"></span></p>
+    <p>在庫数<span th:text="${newItemForm.amount}"></span></p>
+    <p>商品カテゴリ<span th:text="${productCategory.categoryName}"></span></p>
+    <!-- <p>
+      画像<span><img th:src="${$newItemForm.imageUrl}" alt="画像" /></span>
+    </p> -->
+    <form
+      th:action="@{/admin/register}"
+      method="get"
+      th:object="${newItemForm}"
+    >
+      <!-- <img th:src="${imageUrl}" alt="画像" /> -->
+      <p>
+        <a th:href="@{/admin/product}">キャンセル</a>
+        <input type="submit" value="完了" />
+      </p>
+    </form>
+    <a th:href="@{/admin/product-add}">戻る</a>
+    <div th:insert="fragment/fragment::footer"></div>
+  </body>
+</html>
