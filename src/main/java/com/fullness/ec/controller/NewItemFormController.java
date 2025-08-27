@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fullness.ec.service.ProductCategoryService;
 import com.fullness.ec.entity.ProductCategory;
 import com.fullness.ec.form.NewItemForm;
-import com.fullness.ec.helper.ImageUploadHelper;
 import com.fullness.ec.helper.NewItemHelper;
 
 @Controller
