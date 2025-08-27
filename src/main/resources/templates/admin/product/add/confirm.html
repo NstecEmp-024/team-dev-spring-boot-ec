@@ -17,7 +17,7 @@
     <h1>新商品登録(確認)</h1>
 
     <p>商品名<span th:text="${newItemForm.name}"></span></p>
-    <p>単価<span th:text="${newItemForm.price}"></span></p>
+    <p>単価<span th:text="${newItemForm.price} + '円'"></span></p>
     <p>在庫数<span th:text="${newItemForm.amount}"></span></p>
     <p>商品カテゴリ<span th:text="${productCategory.categoryName}"></span></p>
     <!-- <p>
