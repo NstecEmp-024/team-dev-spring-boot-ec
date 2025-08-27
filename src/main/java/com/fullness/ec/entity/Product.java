@@ -12,6 +12,7 @@ public class Product {
     private Integer categoryId; //商品カテゴリID
     private String name; //商品名
     private Integer price; //価格
+    private Integer amount; //在庫数
     private String image; //商品画像URL
     private boolean deleteFlag; //削除フラグ
 }
