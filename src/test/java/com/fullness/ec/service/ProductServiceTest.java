@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fullness.ec.entity.Product;
 import com.fullness.ec.form.NewItemForm;
@@ -21,6 +22,7 @@ public class ProductServiceTest {
 
     // 全商品一覧をページ毎に取得するメソッドのテスト
 
+    @Transactional
     @Test
     void testFindProductByPage_findAllProducts_CategoryId_null() {
         // テストの実装
@@ -42,6 +44,7 @@ public class ProductServiceTest {
     }
 
     // 取得したカテゴリIDに基づいて商品一覧をページ毎に取得するメソッドのテスト
+    @Transactional
     @Test
     void testFindProductByPage_findProductsByCategoryId_0() {
         // テストの実装
@@ -62,6 +65,7 @@ public class ProductServiceTest {
     }
 
     // 商品IDを指定して商品情報を取得するメソッドのテスト
+    @Transactional
     @Test
     void testFindProductByPage_findProductsByCategoryId_2() {
         // テストの実装
@@ -82,6 +86,7 @@ public class ProductServiceTest {
 
     }
 
+    @Transactional
     @Test
     void testAddProduct() {
         // テストの実装
