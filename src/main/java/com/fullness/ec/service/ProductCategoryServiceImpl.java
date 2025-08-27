@@ -17,6 +17,8 @@ import com.fullness.ec.repository.ProductCategoryRepository;
 public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+    @Autowired
+    private ProductCategoryRepository categoryRepository;
     /**
      * 商品カテゴリ一覧を取得する
      * @return 商品カテゴリ一覧
@@ -25,6 +27,18 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public List<ProductCategory> getAllProductCategories(){
         return productCategoryRepository.findAllCategories();
+    }
+
+    @Override
+    public void addCategory(ProductCategory productCategory) {
+        // 商品カテゴリを追加する
+        categoryRepository.insert(productCategory);
+    }
+    @Override
+    public boolean existCategory(String categoryName) {
+        // 商品カテゴリ名で検索して存在チェック
+        List<ProductCategory> categories = categoryRepository.selectByName(categoryName);
+        return !categories.isEmpty();
     }
     
 }

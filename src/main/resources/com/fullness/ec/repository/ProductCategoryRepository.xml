@@ -6,4 +6,14 @@
         select id as categoryId, name as categoryName
             from product_category order by id asc
     </select>
+    <select id="selectAll" resultType="com.fullness.ec.entity.ProductCategory"> select * from
+        product_category
+    </select>
+    <insert id="insert" parameterType="com.fullness.ec.entity.ProductCategory"> insert into
+        product_category(name) values (#{categoryName})
+    </insert>
+    <select id="selectByName" parameterType="java.lang.String"
+        resultType="com.fullness.ec.entity.ProductCategory"> SELECT * FROM product_category WHERE
+        name = #{categoryName}
+    </select>
 </mapper>
