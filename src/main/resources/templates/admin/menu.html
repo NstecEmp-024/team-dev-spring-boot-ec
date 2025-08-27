@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>menu</title>
 </head>
-
 <body>
+    <div th:replace="fragment/fragment::header"></div>
     <div style="text-align: center;">
-    <h1>メニュー</h1>
-    <img src="img/Shop_Img1.jpeg" style="width: 200px; height: auto;">
+        <h1>メニュー</h1>
+        <img src="/images/Shop_Img1.jpeg" style="width: 200px; height: auto;">
     </div>
+    <div th:insert="fragment/fragment::footer"></div>
 </body>
-
 </html>

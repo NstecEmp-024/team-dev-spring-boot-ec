@@ -2,13 +2,26 @@ name: チーム開発演習(Spring Boot) - team-dev-spring-boot-ec
 
 on:
   push:
-    branches: [ master ]          # masterブランチへのpush時に実行
-  pull_request:
-    branches: [ master ]          # masterブランチへのPR時にも実行
+    branches: [ productBranch ]          # masterブランチへのpush時に実行
+#  pull_request:
+#    branches: [ master ]          # masterブランチへのPR時にも実行
 
 jobs:
   build-and-test:                  # テスト＋ビルドをまとめたジョブ
     runs-on: ubuntu-latest         # Ubuntu最新環境で実行
+
+    # 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: postgres       
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d postgres"
+          --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: ソースコードをチェックアウト
@@ -30,10 +43,48 @@ jobs:
           restore-keys: |          # キャッシュが見つからなかったときの復元キー
             ${{ runner.os }}-gradle-
 
-      - name: gradlew に実行権限を付与
+      - name: gradlewに実行権限を付与
         run: chmod +x ./gradlew    # gradlewを実行できるように権限追加
 
+      - name: psqlクライアントをインストール
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: DBとテーブル作成し初期データを作成する
+        env:
+          PGPASSWORD: postgres
+        run: |
+          for i in {1..30}; do
+            if psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -c "SELECT 1" >/dev/null 2>&1; then
+              echo "Postgres is up"; break
+            fi
+              echo "Waiting for Postgres... ($i)"; sleep 1
+          done
+          psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -tc "SELECT 1 FROM pg_database WHERE datname='fullness_ec'" | grep -q 1 \
+            || psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -c "CREATE DATABASE fullness_ec"
+
+          psql -v ON_ERROR_STOP=1 \
+               -h 127.0.0.1 -p 5432 \
+               -U postgres -d postgres \
+               -f src/main/resources/db/init.sql
+          psql -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 5432 -U postgres -d fullness_ec -f src/main/resources/db/init.sql
+
+      - name: DBダンプ（診断）
+        env:
+          PGPASSWORD: postgres
+        run: |
+          echo '--- \dt public.* in fullness_ec ---'
+          psql -h 127.0.0.1 -p 5432 -U postgres -d fullness_ec -c "\dt public.*"
+
+          echo '--- sanity check counts ---'
+          for t in department employee employee_account product_category product product_stock; do
+            echo "# $t"
+            psql -h 127.0.0.1 -p 5432 -U postgres -d fullness_ec -c "SELECT COUNT(*) FROM $t;" || true
+          done
       - name: テストを実行
+        env:
+          SPRING_PROFILES_ACTIVE: test   # test用プロファイルを有効化する
         run: ./gradlew test        # JUnitなどのテストを実行
 
       - name: ビルドを実行
@@ -83,4 +134,3 @@ jobs:
             sudo systemctl restart fullness-ec.service
             sudo systemctl status fullness-ec.service --no-pager -l || true
           EOF
-
