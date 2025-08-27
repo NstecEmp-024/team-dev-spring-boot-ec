@@ -28,7 +28,7 @@
         class="error"
       ></span
       ><br />
-      <p>価格<input type="number" th:field="*{price}" /></p>
+      <p>単価<input type="number" th:field="*{price}" /></p>
       <span
         th:if="${#fields.hasErrors('price')}"
         th:errors="*{price}"
