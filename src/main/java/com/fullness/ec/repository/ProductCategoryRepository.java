@@ -10,5 +10,7 @@ import com.fullness.ec.entity.ProductCategory;
 public interface ProductCategoryRepository {
     // 全てのカテゴリを取得する
     List<ProductCategory> findAllCategories();
-    
+    List<ProductCategory> selectAll();
+    void insert(ProductCategory productCategory);
+    List<ProductCategory> selectByName(String categoryName);
 }
