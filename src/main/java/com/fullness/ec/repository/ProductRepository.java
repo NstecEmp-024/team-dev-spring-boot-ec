@@ -57,4 +57,7 @@ public interface ProductRepository {
      */
     void insert(Product product);
 
+    //テストで全データを取得するために使用
+    List<Product> selectAll();
+
 }
