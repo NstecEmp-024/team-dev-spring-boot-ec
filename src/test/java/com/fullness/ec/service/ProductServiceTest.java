@@ -96,6 +96,6 @@ public class ProductServiceTest {
 
         productService.addProduct(newItemForm);
         List<Product> result = productService.selectAll();
-        assertEquals(25, result.size());
+        assertEquals(26, result.size());
     }
 }
