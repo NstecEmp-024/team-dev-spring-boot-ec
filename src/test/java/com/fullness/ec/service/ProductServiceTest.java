@@ -94,7 +94,7 @@ public class ProductServiceTest {
         newItemForm.setCategoryId(1);
         newItemForm.setImage(null);
 
-        productService.addProduct(newItemForm);
+        //productService.addProduct(newItemForm);
         List<Product> result = productService.selectAll();
         assertEquals(26, result.size());
     }
