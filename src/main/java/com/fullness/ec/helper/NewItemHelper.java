@@ -11,6 +11,7 @@ public class NewItemHelper {
         product.setName(newItemForm.getName());
         product.setPrice(newItemForm.getPrice());
         product.setAmount(newItemForm.getAmount());
+        product.setImage("");
         return product;
     }
 }

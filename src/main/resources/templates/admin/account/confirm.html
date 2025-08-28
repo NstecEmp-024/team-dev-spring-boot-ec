@@ -7,16 +7,28 @@
     <title>アカウント登録（確認）</title>
 </head>
 <!--変数名とURLを正しいものに変更する-->
+
 <body>
+    <div th:replace="fragment/fragment::header"></div>
+
     <div style="text-align: center;">
-        <h1>アカウント登録（確認）</h1>
-        <p>社員名 <span th:text="${empName}"></span></p>
-        <p>アカウント名<span th:text="${empId}"></span></p>
-        <p>パスワード <span th:text="${password}"></span></p>
+        <form th:action="@{/admin/account/complete}" method="post" th:object="${accountForm}">
+            <input type="hidden" th:field="*{empId}" />
+            <input type="hidden" th:field="*{accountName}" />
+            <input type="hidden" th:field="*{password}" />
+            <h1>アカウント登録（確認）</h1>
+            <p>社員名 <span th:text="${accountForm.employeeName}"></span></p>
+            <p>アカウント名<span th:text="${accountForm.accountName}"></span></p>
+            <p>パスワード*******</p>
 
-        <br><a href="h">キャンセル</a>　　<a href="h">戻る　　</a><button type="submit">登録</button>
-
+            <br>
+            <a href="@{/admin/account/form}">キャンセル</a>
+            <a href="@{/admin/account/form}">戻る</a>
+            <button type="submit">登録</button>
+        </form>
     </div>
+    <div th:insert="fragment/fragment::footer"></div>
+
 </body>
 
 </html>

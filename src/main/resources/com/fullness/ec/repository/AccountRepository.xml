@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fullness.ec.repository.AccountRepository">
-
+  <insert id="insert" parameterType="com.fullness.ec.entity.Account">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+          select nextval('employee_account_id_seq')
+        </selectKey>
+        insert into employee_account (id, name, password , employee_id)
+        values (#{id}, #{name}, #{password} , #{employeeId})
+  </insert>
   <resultMap id="accountResultMap" type="com.fullness.ec.entity.Account">
-  <id property="employeeId" column="empId"/>
-  <result property="name" column="name"/>
-  <result property="password" column="password"/>
-  
-</resultMap>
-
-
-<select id="selectByUserName" parameterType="String" resultMap="accountResultMap">
+    <id property="employeeId" column="empId"/>
+    <result property="name" column="name"/>
+    <result property="password" column="password"/>
+  </resultMap>
+  <select id="selectByUserName" parameterType="String" resultMap="accountResultMap">
   SELECT ea.id AS employeeId,
        ea.name AS name,
        ea.password
@@ -18,5 +21,4 @@ FROM employee_account ea
 WHERE ea.name = #{username}
 
 </select>
-
 </mapper>

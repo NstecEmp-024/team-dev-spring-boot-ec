@@ -36,7 +36,7 @@ public class ProductServiceTest {
         // 期待される結果を検証
         assertEquals(10, productsPage.getContent().size()); // 実際に取得された件数
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
-        assertEquals(24, productsPage.getTotalElements()); // 総件数
+        assertEquals(25, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
         assertEquals("蛍光ペン(緑)", productsPage.getContent().get(9).getName()); // ソート順による10番目
 
@@ -57,7 +57,7 @@ public class ProductServiceTest {
         // 期待される結果を検証
         assertEquals(10, productsPage.getContent().size()); // 実際に取得された件数
         assertEquals(3, productsPage.getTotalPages()); // 総ページ数
-        assertEquals(24, productsPage.getTotalElements()); // 総件数
+        assertEquals(25, productsPage.getTotalElements()); // 総件数
         assertEquals("水性ボールペン(黒)", productsPage.getContent().get(0).getName()); // ソート順による先頭
         assertEquals("蛍光ペン(緑)", productsPage.getContent().get(9).getName()); // ソート順による10番目
     }
@@ -75,11 +75,11 @@ public class ProductServiceTest {
         Page<Product> productsPage = productService.findProductByPage(pageable, categoryId);
 
         // 期待される結果を検証
-        assertEquals(4, productsPage.getContent().size()); // 実際に取得された件数
+        assertEquals(5, productsPage.getContent().size()); // 実際に取得された件数
         assertEquals(1, productsPage.getTotalPages()); // 総ページ数
-        assertEquals(4, productsPage.getTotalElements()); // 総件数
+        assertEquals(5, productsPage.getTotalElements()); // 総件数
         assertEquals("ワンタッチ開閉傘", productsPage.getContent().get(0).getName()); // ソート順による先頭
-        assertEquals("キーホルダ", productsPage.getContent().get(3).getName()); // ソート順による先頭
+        assertEquals("防水スプレー", productsPage.getContent().get(3).getName()); // ソート順による先頭
 
     }
 

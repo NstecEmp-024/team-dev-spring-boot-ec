@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class AccountRole {
-    private Integer empId; 
-    private String empName;
+public class Employee {
+    private Integer id; // 従業員ID
+    private String name; // 従業員名
 }
