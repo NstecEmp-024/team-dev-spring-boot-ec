@@ -109,14 +109,14 @@ jobs:
 
       - name: 秘密鍵を書き出す
         run: |
-          echo "${{ secrets.SPRINGBOOT_EC_PRIVATE_KEY }}" > ec2-key.pem
+          echo "${{ secrets.AWS_EC2_PRIVATE_KEY }}" > ec2-key.pem
           chmod 600 ec2-key.pem
 
       - name: jarファイルをEC2のサーバに転送
         run: |
           scp -i ec2-key.pem -o StrictHostKeyChecking=no \
             app/fullness-ec-0.0.1-SNAPSHOT.jar \
-            ubuntu@${{ secrets.EC2_HOST_ID }}:/home/ubuntu/fullness-ec-0.0.1-SNAPSHOT.jar
+            ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/fullness-ec-0.0.1-SNAPSHOT.jar
 
       - name: 稼働パスへ反映して再起動
         run: |
