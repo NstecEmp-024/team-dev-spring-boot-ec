@@ -33,6 +33,9 @@ public class AccountUserDetailsService implements UserDetailsService {
         // Spring securityに通知
       throw new UsernameNotFoundException("ユーザー名が見つかりません: " + username);
     }
+    // テスト
+           System.out.println("✅ ユーザー取得成功: " + account.getName());
+        System.out.println("🔑 ハッシュ化されたパスワード: " + account.getPassword());
     // AccountデータからAccountUserDetailsを作成する
     Collection<GrantedAuthority> authorities = getAuthorities(account);
     // Spring scurityに承認データをわたす。
@@ -45,21 +48,26 @@ public class AccountUserDetailsService implements UserDetailsService {
    * @return ユーザーアカウント権限情報
    */
   private Collection<GrantedAuthority> getAuthorities(Account account) {
-    switch (account.getRole().getEmpName()) {
-      case "admin":
-        return AuthorityUtils.createAuthorityList(
-          "ROLE_ADMIN",
-          "ROLE_USER",
-          "ROLE_GUEST"
-        );
-      case "user":
-        return AuthorityUtils.createAuthorityList(
-          "ROLE_USER",
-          "ROLE_GUEST"
-        );
-      default:
-        return AuthorityUtils.createAuthorityList("ROLE_GUEST");
-    }
+    return AuthorityUtils.createAuthorityList("ROLE_USER");
+   }
   }
 
-}
+    // switch (account.getRole().getEmpName()) { // .getRole()
+    //   case "admin":
+    //     return AuthorityUtils.createAuthorityList(
+    //       "ROLE_ADMIN",
+    //       "ROLE_USER",
+    //       "ROLE_GUEST"
+    //     );
+    //   case "user":
+    //     return AuthorityUtils.createAuthorityList(
+    //       "ROLE_USER",
+    //       "ROLE_GUEST"
+    //     );
+    //   default:
+    //     return AuthorityUtils.createAuthorityList("ROLE_GUEST");
+    // }
+  
+
+
+

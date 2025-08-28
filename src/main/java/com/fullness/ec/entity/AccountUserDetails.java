@@ -1,6 +1,7 @@
 package com.fullness.ec.entity;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +26,8 @@ public class AccountUserDetails implements UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return Collections.emptyList();
+        // return authorities;
     }
     /** 
      * ユーザーアカウントのパスワードを戻す
@@ -38,7 +40,7 @@ public class AccountUserDetails implements UserDetails {
      * @return ユーザーアカウントのユーザー名
      */
     @Override
-    public String getUsername() { return account.getAccountName(); }
+    public String getUsername() { return account.getName(); }
     /** 
      * アカウント自体の有効期限を戻す
      * @return アカウント自体の有効期限

@@ -21,19 +21,26 @@
         <br>
     <h1>ログイン</h1>
     <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
-    <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}" class="error"></span>
-    </div>
-    <div layout:fragment="content">
-     <form th:action="@{/auth}" method="post">
-        ユーザー名：<input type="text" id="username" name="username" required>
+        <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}" class="error"></span>
+     </div>
+    <div layout:fragment="content"> 
+      <form th:action="@{/auth}" method="post"> 
+      アカウント名：<input type="text" id="username" name="username">
+         
+         
         <p> </p>
-        パスワード：<input type="password" id="password" name="password" required>
-        <p> </p>
+        パスワード：<input type="password" id="password" name="password">
+            
+        <p></p>
         <button type="submit">ログイン</button>
-        <p style="height: 100px;"> </p>
-    </div>
+        </span>
+      </br>
 
-    </form>
+        <p style="height: 100px;"> </p>
+      </form>
+    </div> 
+    
+
 </body>
 <div th:insert="fragment/fragment::footer"></div>
 </html>

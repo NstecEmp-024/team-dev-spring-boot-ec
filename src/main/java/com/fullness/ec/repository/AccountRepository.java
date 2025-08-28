@@ -9,5 +9,6 @@ public interface  AccountRepository {
     void insert(Account account);
 
     Account selectByUserName(String username);
+    // @Param("username") String username
 
 }

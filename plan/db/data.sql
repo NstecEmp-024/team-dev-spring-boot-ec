@@ -1,7 +1,7 @@
 -- department data
-insert into department(name) values('開発部');
-insert into department(name) values('商品企画部');
-insert into department(name) values('営業部');
+insert into department(id,name) values(1,'開発部');
+insert into department(id,name) values(2,'商品企画部');
+insert into department(id,name) values(3,'営業部');
 
 -- employee data
 insert into employee(name,name_kana,department_id) values('高橋太郎','タカハシ',1);
@@ -9,7 +9,7 @@ insert into employee(name,name_kana,department_id) values('田中花子','タナ
 insert into employee(name,name_kana,department_id) values('佐藤次郎','サトウ',1);
 
 -- employee account data
--- insert into employee_account(name,password,employee_id) values('admin','admin',1);
+insert into employee_account(name,password,employee_id) values('admin','admin',1);
 
 -- product_category data
 insert into product_category(name) values('文房具');

@@ -23,8 +23,10 @@ import jakarta.servlet.DispatcherType;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-  @Autowired private AccountUserDetailsService service;
-  @Autowired private PasswordEncoder encoder;
+  @Autowired
+   private AccountUserDetailsService service;
+  @Autowired
+   private PasswordEncoder encoder;
   /**
    * Spring Securityの認証時に使うサービスとパスワードエンコーダーを登録
    * 今回はDIしている`AccountUserDetailsService`クラスと`PasswordEncoder`クラスを登録
@@ -60,12 +62,14 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     // ログイン設定
-    http.formLogin(login -> login
+    http
+    .authenticationManager(authenticationManager(service, encoder)) // ← これを追加！
+    .formLogin(login -> login
       .loginProcessingUrl("/auth") // 認証処理を起動するURL
       .loginPage("/admin/login") // ログイン画面のURL
       .usernameParameter("username") // 認証リクエストのユーザーパラメーターのキー名の指定
       .passwordParameter("password") // 認証リクエストのパスワードパスワードのキー名の指定
-      .defaultSuccessUrl("/menu") // ログイン成功時のURL
+      .defaultSuccessUrl("/admin/admin") // ログイン成功時のURL
       .failureUrl("/admin/login") // ログイン失敗時のURL
       .permitAll() // ログイン画面は認証対象外
     );
@@ -83,11 +87,19 @@ public class SecurityConfig {
     http.authorizeHttpRequests(authz -> authz
       .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll() // エラー画面は認証対象外
       .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // 静的リソースは認証対象外
+      .requestMatchers("/admin/admin").permitAll()
       .requestMatchers("/admin/login").permitAll() // ログイン画面は認証対象外
-      .requestMatchers("/menu","/logout","/session/**").authenticated() // 認証対象
-      .anyRequest().permitAll() // その他は認証対象
-      // .authenticated()
+      .requestMatchers("/admin","/logout","/session/**").authenticated() // 認証対象
+       .anyRequest() //.permitAll() // その他は認証対象
+      .authenticated()
     );
     return http.build();
   }
+
+  //  @Bean
+  //   public PasswordEncoder passwordEncoder() {
+  //       return new BCryptPasswordEncoder();
+  //   }
+
+
 }
