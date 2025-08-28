@@ -2,30 +2,41 @@ package com.fullness.ec.service;
 
 import com.fullness.ec.entity.Account;
 import com.fullness.ec.entity.Employee;
+import com.fullness.ec.entity.ProductCategory;
+import com.fullness.ec.repository.AccountRepository;
+import com.fullness.ec.repository.EmployeeAccountRepository;
+
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+
 @SpringBootTest
 public class AccountServiceTest {
-
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private EmployeeAccountRepository employeeRepository;
 
     @Test
     public void testAddAccount() {
-        // アカウントを作成
-        Account account = new Account(1, "test", "password");
-        accountService.addAccount(account);
+        Account account = new Account();
+        account.setName("testuser");
+        account.setPassword("password");
+        account.setEmployeeId(1); // 既存の従業員IDを設定
 
-        // 追加したアカウントを確認するために、リポジトリから取得するなどの方法を使用します。
-        // ここでは簡単のため、nullチェックのみ行います。
-        assertNotNull(account);
-        assertEquals("test", account.getName());
-        assertEquals("password", account.getPassword());
-        assertTrue(true);
+        accountService.addAccount(account);    
     }
 
     @Test
