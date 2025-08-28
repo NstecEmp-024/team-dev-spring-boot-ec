@@ -77,7 +77,7 @@ public class ProductServiceTest {
         // 期待される結果を検証
         assertEquals(5, productsPage.getContent().size()); // 実際に取得された件数
         assertEquals(1, productsPage.getTotalPages()); // 総ページ数
-        assertEquals(4, productsPage.getTotalElements()); // 総件数
+        assertEquals(5, productsPage.getTotalElements()); // 総件数
         assertEquals("ワンタッチ開閉傘", productsPage.getContent().get(0).getName()); // ソート順による先頭
         assertEquals("キーホルダ", productsPage.getContent().get(3).getName()); // ソート順による先頭
 
