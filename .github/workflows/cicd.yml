@@ -117,10 +117,10 @@ jobs:
           scp -i ec2-key.pem -o StrictHostKeyChecking=no \
             app/fullness-ec-0.0.1-SNAPSHOT.jar \
             ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/fullness-ec-0.0.1-SNAPSHOT.jar
-
+ 
       - name: 稼働パスへ反映して再起動
         run: |
-          ssh -i ec2-key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST_ID }} <<'EOF'
+          ssh -i ec2-key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST}} <<'EOF'
             set -e
             # 稼働ディレクトリに配置(差し替え)
             sudo mkdir -p /opt/fullness-ec
