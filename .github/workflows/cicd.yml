@@ -2,7 +2,7 @@ name: チーム開発演習(Spring Boot) - team-dev-spring-boot-ec
 
 on:
   push:
-    branches: [ productBranch ]          # masterブランチへのpush時に実行
+    branches: [ productBranch ]          # productBranchブランチへのpush時に実行
 #  pull_request:
 #    branches: [ master ]          # masterブランチへのPR時にも実行
 
