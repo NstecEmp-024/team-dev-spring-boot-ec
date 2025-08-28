@@ -54,9 +54,9 @@ dependencies {
 	// ページネーション
   	implementation 'org.springframework.data:spring-data-commons'
 	// Spring Security
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
-    //implementation 'org.springframework.security:spring-security-config'
-    //implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     //implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
